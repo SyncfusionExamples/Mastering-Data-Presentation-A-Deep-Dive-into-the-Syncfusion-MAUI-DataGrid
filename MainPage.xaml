@@ -1,0 +1,101 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:local="clr-namespace:MAUI_Sync_DataGrid"
+             xmlns:syncfusion="clr-namespace:Syncfusion.Maui.DataGrid;assembly=Syncfusion.Maui.DataGrid"
+             x:Class="MAUI_Sync_DataGrid.MainPage" WidthRequest="800">
+    <ContentPage.BindingContext>
+        <local:TemplateViewModel/>
+    </ContentPage.BindingContext>
+    <ContentPage.Resources>
+        <Style TargetType="syncfusion:DataGridHeaderCell">
+            <Setter Property="FontAttributes" Value="Bold"/>
+        </Style>
+    </ContentPage.Resources>
+    <syncfusion:SfDataGrid AutoGenerateColumnsMode="None"
+                           SelectionUnit="Row"
+                           NavigationMode="Cell"
+                          AllowEditing="True"
+                           SelectionMode="Single"
+                       SortingMode="Multiple"
+                           x:Name="dataGrid"
+                       ShowSortNumbers="True"
+                           Loaded="SfDataGrid_Loaded"
+                       GridLinesVisibility="Both"
+                       GroupingMode="Multiple"
+                       Margin="10"
+                       HeaderGridLinesVisibility="Both"
+                       ItemsSource="{Binding DealerInformation}"
+                       ColumnWidthMode="Fill">
+        <!--<syncfusion:SfDataGrid.GroupColumnDescriptions>
+            <syncfusion:GroupColumnDescription ColumnName="DealerName" />
+        </syncfusion:SfDataGrid.GroupColumnDescriptions>
+        <syncfusion:SfDataGrid.CaptionSummaryRow>
+            <syncfusion:DataGridSummaryRow Title="Number of Customers : {DealerName}"
+                                   ShowSummaryInRow="True">
+                <syncfusion:DataGridSummaryRow.SummaryColumns>
+                    <syncfusion:DataGridSummaryColumn Name="DealerName"
+                                              Format="{}{Count}"
+                                              MappingName="Salary"
+                                              SummaryType="CountAggregate" />
+                </syncfusion:DataGridSummaryRow.SummaryColumns>
+            </syncfusion:DataGridSummaryRow>
+        </syncfusion:SfDataGrid.CaptionSummaryRow>
+        <syncfusion:SfDataGrid.GroupSummaryRows>
+            <syncfusion:DataGridSummaryRow ShowSummaryInRow="True"
+                                       Title="Total Quantity: {Quantity}">
+                <syncfusion:DataGridSummaryRow.SummaryColumns>
+                    <syncfusion:DataGridSummaryColumn Name="Quantity"
+                                                  MappingName="Quantity"
+                                                  Format="{}{Sum:C0}"
+                                                  SummaryType="DoubleAggregate">
+                    </syncfusion:DataGridSummaryColumn>
+                </syncfusion:DataGridSummaryRow.SummaryColumns>
+            </syncfusion:DataGridSummaryRow>
+        </syncfusion:SfDataGrid.GroupSummaryRows>
+        <syncfusion:SfDataGrid.TableSummaryRows>
+            <syncfusion:DataGridTableSummaryRow Title="Total Orders :{TotalOrders}"
+                                        ShowSummaryInRow="True">
+                <syncfusion:DataGridTableSummaryRow.SummaryColumns>
+                    <syncfusion:DataGridSummaryColumn Name="TotalOrders"
+                                              Format="{}{Count}"
+                                              MappingName="OrderID"
+                                              SummaryType="CountAggregate" />
+                </syncfusion:DataGridTableSummaryRow.SummaryColumns>
+            </syncfusion:DataGridTableSummaryRow>
+        </syncfusion:SfDataGrid.TableSummaryRows>-->
+
+        <syncfusion:SfDataGrid.Columns>
+            <syncfusion:DataGridNumericColumn HeaderText="Order ID"
+                                          Format="D"
+                                          MappingName="OrderID" />
+            <syncfusion:DataGridTextColumn  HeaderText="Customer ID"
+                                        MappingName="CustomerID" />
+            <syncfusion:DataGridTextColumn  HeaderText="Name"
+                                        MappingName="DealerName" />
+            <syncfusion:DataGridTextColumn  HeaderText="Quantity"
+                                        MappingName="Quantity">
+                <syncfusion:DataGridTextColumn.Visible>
+                    <OnPlatform x:TypeArguments="x:Boolean">
+                        <On Platform="iOS,Android"
+                            Value="False" />
+                        <On Platform="WinUI,MacCatalyst"
+                            Value="True" />
+                    </OnPlatform>
+                </syncfusion:DataGridTextColumn.Visible>
+            </syncfusion:DataGridTextColumn>
+            <syncfusion:DataGridTextColumn  HeaderText="Freight"
+                                        MappingName="Freight">
+                <syncfusion:DataGridTextColumn.Visible>
+                    <OnPlatform x:TypeArguments="x:Boolean">
+                        <On Platform="iOS,Android"
+                            Value="False" />
+                        <On Platform="WinUI,MacCatalyst"
+                            Value="True" />
+                    </OnPlatform>
+                </syncfusion:DataGridTextColumn.Visible>
+            </syncfusion:DataGridTextColumn>
+        </syncfusion:SfDataGrid.Columns>
+    </syncfusion:SfDataGrid>
+
+</ContentPage>
